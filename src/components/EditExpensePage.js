@@ -27,7 +27,6 @@ export class EditExpensePage extends React.Component {
     }
 }
 
-
 const mapStatetoProps = (state, props) => ({
     //this particular expense is now accessible in the EditExpensePage component via props.expense
     expense: state.expenses.find((expense) => expense.id === props.match.params.id)
