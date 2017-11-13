@@ -1,13 +1,13 @@
 import uuid from 'uuid';
 import database from '../firebase/firebase';
 
-// ADD_EXPENSE Action generator
+// ADD_EXPENSE Action generator (sends to redux store)
 export const addExpense = (expense) => ({
     type: 'ADD_EXPENSE',
     expense
 });
 
-// Add Expense to database then call action generator
+// Add Expense to Firebase database then call action generator
 export const startAddExpense = (expenseData = {}) => {
     return (dispatch) => {
         const {
@@ -39,3 +39,27 @@ export const editExpense = (id, updates) => ({
     id,
     updates
 });
+
+// SET_EXPENSES
+export const setExpenses = (expenses) => ({
+    type: 'SET_EXPENSES',
+    expenses
+});
+
+// START_SET_EXPENSES (function to fetch all expenses from firebase, then dispatch SET_EXPENSES action)
+export const startSetExpenses = () => {
+    return (dispatch) => {
+        return database.ref('expenses').once('value').then((snapshot) => {
+            const expenses = [];
+            snapshot.forEach((childSnapshot) => {
+                expenses.push({
+                    id: childSnapshot.key,
+                    ...childSnapshot.val()
+                });
+            });
+            dispatch(setExpenses(expenses));
+        }).catch((e) => {
+            console.log('Error fetching data', e)
+        }); 
+    };
+};
