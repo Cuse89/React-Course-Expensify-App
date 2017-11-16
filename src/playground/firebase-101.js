@@ -12,7 +12,7 @@ var config = {
 firebase.initializeApp(config);
 
 const database = firebase.database();
-
+////////////////////////////////////// ADD TO DATABASE ////////////////////////////
 // database.ref().set({
 //     name: 'Marcus Guthrie',
 //     age: 28,
@@ -31,13 +31,13 @@ const database = firebase.database();
 // }).catch((e) => {
 //     console.log('This failed.', e)
 // });
-
+//////////////////////////////////////// EDIT IN DATABASE /////////////////////////
 // database.ref().update({
 //     stressLevel: '9',
 //     'job/company': 'Amazon',
 //     'location/city': 'London'
 // });
-
+//////////////////////////////////////////////////////// REMOVE FROM DATABASE ///////////////////
 // database.ref('isSingle').remove().then(() => {
 //     console.log('Removed')
 // }).catch((e) => {
